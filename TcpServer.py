@@ -1,10 +1,16 @@
+# coding: UTF-8
 import socket
+import datetime
+import os
 
 
 class TCPServer:
+    document_root = "src_html/"
+
     def main(self):
         # create an INET(IPv4), STREAMing socket socketのインスタンスを生成
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         # bind the socket to a public host, and a well-known port 8080番ポート向けにきた通信を受け取る設定
         server_socket.bind(("localhost", 8080))
         # become a server socket 待ち受けモードになる
@@ -21,15 +27,30 @@ class TCPServer:
         with open("server_recv.txt", "wb") as f:
             f.write(msg_from_client)
 
+        # ステータスコード
+        status_code = "HTTP/1.1 200 OK\n"
+
+        # レスポンスヘッダ
+        date = f"Date: {self._get_date()}\n"
+        server = "Server: Nao/0.1\n"
+        connection = "Connection: Close\n"
+        content_type = "Content-type: text/html\n"
+        blank_line = "\n"
+
         # 送り返す用のメッセージをファイルから読み込む
-        with open("server_send.txt", "rb") as f:
-            msg_to_client = f.read()
+        with open(os.path.join(self.document_root, "index.html"), "rb") as f:
+            msg_to_client = (status_code + date + server + connection + content_type + blank_line).encode() + f.read()
+            print(msg_to_client.decode())
 
         # メッセージを送り返す
         client_socket.send(msg_to_client)
 
         client_socket.close()
         print("通信を終了しました")
+
+    @staticmethod
+    def _get_date() -> str:
+        return datetime.datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT')
 
 
 if __name__ == '__main__':

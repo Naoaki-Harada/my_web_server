@@ -1,1 +1,14 @@
-クライアントからお便りが届きました。
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ja,en-US;q=0.9,en;q=0.8
+Cookie: csrftoken=VsrgvbTUie0vXNeB9cvRJNG1XOuhuvBXSvD6jpXYbpVK5rurHKDl95Pn4NwoEIMR; username-localhost-8888="2|1:0|10:1600339944|23:username-localhost-8888|44:MzdiZjU5YWI3MGMyNDA4OWE5NzU5MTk4MWY2ZmQ1NDQ=|bfff387111cb03b57457f1da53244fe293be09ed4fb198dc3fdbbce43d41d318"
+

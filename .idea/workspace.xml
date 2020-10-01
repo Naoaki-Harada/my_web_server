@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9697ba58-03ad-4b1e-8394-b08a0872081a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/TcpClient.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client_send.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TcpServer1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src_html/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TcpServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/TcpServer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server_recv.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server_recv.txt" afterDir="false" />
@@ -34,11 +34,15 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.stylelint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.stylelint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.stylelint" value="" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="Python.TcpClient">
+  <component name="RunManager" selected="Python.TcpServer">
     <configuration name="TcpClient" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="my_web_server" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -85,8 +89,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.TcpClient" />
         <item itemvalue="Python.TcpServer" />
+        <item itemvalue="Python.TcpClient" />
       </list>
     </recent_temporary>
   </component>
@@ -100,6 +104,7 @@
       <updated>1600327027328</updated>
       <workItem from="1600327028354" duration="3104000" />
       <workItem from="1600927091333" duration="3559000" />
+      <workItem from="1601532250470" duration="6463000" />
     </task>
     <servers />
   </component>
@@ -107,33 +112,37 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1715" height="206" key="GridCell.Tab.0.bottom" timestamp="1600934433079">
+    <state x="780" y="495" key="#Stylelint" timestamp="1601533903871">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="1715" height="206" key="GridCell.Tab.0.bottom/0.23.1920.977@0.23.1920.977" timestamp="1600934433079" />
+    <state x="780" y="495" key="#Stylelint/0.23.1920.977@0.23.1920.977" timestamp="1601533903871" />
+    <state width="1878" height="253" key="GridCell.Tab.0.bottom" timestamp="1601539222919">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state width="1878" height="253" key="GridCell.Tab.0.bottom/0.23.1920.977@0.23.1920.977" timestamp="1601539222919" />
     <state width="1715" height="206" key="GridCell.Tab.0.bottom/0.23.1920.992@0.23.1920.992" timestamp="1600331888572" />
     <state width="1715" height="206" key="GridCell.Tab.0.bottom/0.23.1920.994@0.23.1920.994" timestamp="1600329451987" />
-    <state width="1715" height="206" key="GridCell.Tab.0.center" timestamp="1600934433078">
+    <state width="1878" height="253" key="GridCell.Tab.0.center" timestamp="1601539222919">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="1715" height="206" key="GridCell.Tab.0.center/0.23.1920.977@0.23.1920.977" timestamp="1600934433078" />
+    <state width="1878" height="253" key="GridCell.Tab.0.center/0.23.1920.977@0.23.1920.977" timestamp="1601539222919" />
     <state width="1715" height="206" key="GridCell.Tab.0.center/0.23.1920.992@0.23.1920.992" timestamp="1600331888572" />
     <state width="1715" height="206" key="GridCell.Tab.0.center/0.23.1920.994@0.23.1920.994" timestamp="1600329451986" />
-    <state width="1715" height="206" key="GridCell.Tab.0.left" timestamp="1600934433078">
+    <state width="1878" height="253" key="GridCell.Tab.0.left" timestamp="1601539222916">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="1715" height="206" key="GridCell.Tab.0.left/0.23.1920.977@0.23.1920.977" timestamp="1600934433078" />
+    <state width="1878" height="253" key="GridCell.Tab.0.left/0.23.1920.977@0.23.1920.977" timestamp="1601539222916" />
     <state width="1715" height="206" key="GridCell.Tab.0.left/0.23.1920.992@0.23.1920.992" timestamp="1600331888572" />
     <state width="1715" height="206" key="GridCell.Tab.0.left/0.23.1920.994@0.23.1920.994" timestamp="1600329451986" />
-    <state width="1715" height="206" key="GridCell.Tab.0.right" timestamp="1600934433079">
+    <state width="1878" height="253" key="GridCell.Tab.0.right" timestamp="1601539222919">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="1715" height="206" key="GridCell.Tab.0.right/0.23.1920.977@0.23.1920.977" timestamp="1600934433079" />
+    <state width="1878" height="253" key="GridCell.Tab.0.right/0.23.1920.977@0.23.1920.977" timestamp="1601539222919" />
     <state width="1715" height="206" key="GridCell.Tab.0.right/0.23.1920.992@0.23.1920.992" timestamp="1600331888572" />
     <state width="1715" height="206" key="GridCell.Tab.0.right/0.23.1920.994@0.23.1920.994" timestamp="1600329451987" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/my_web_server$TcpClient.coverage" NAME="TcpClient Coverage Results" MODIFIED="1600930416872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/my_web_server$TcpServer.coverage" NAME="TcpServer Coverage Results" MODIFIED="1600930413267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/my_web_server$TcpClient.coverage" NAME="TcpClient Coverage Results" MODIFIED="1601537101935" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/my_web_server$TcpServer.coverage" NAME="TcpServer Coverage Results" MODIFIED="1601539222910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
