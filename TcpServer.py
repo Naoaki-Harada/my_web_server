@@ -5,7 +5,7 @@ import os
 
 
 class TCPServer:
-    document_root = "src_html/"
+    document_root = "src/"
 
     def main(self):
         # create an INET(IPv4), STREAMing socket socketのインスタンスを生成
@@ -22,6 +22,7 @@ class TCPServer:
 
         # クライアントから受け取ったメッセージを代入（4096は受け取れるバイト数）
         msg_from_client = client_socket.recv(4096)
+        path: str = msg_from_client.decode().split("\r\n")[0].split(" ")[1][1:]
 
         # 受け取ったメッセージをファイルに書き込む
         with open("server_recv.txt", "wb") as f:
@@ -38,9 +39,8 @@ class TCPServer:
         blank_line = "\n"
 
         # 送り返す用のメッセージをファイルから読み込む
-        with open(os.path.join(self.document_root, "index.html"), "rb") as f:
+        with open(os.path.join(self.document_root, path), "rb") as f:
             msg_to_client = (status_code + date + server + connection + content_type + blank_line).encode() + f.read()
-            print(msg_to_client.decode())
 
         # メッセージを送り返す
         client_socket.send(msg_to_client)
