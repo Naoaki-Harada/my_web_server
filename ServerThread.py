@@ -1,4 +1,3 @@
-import socket
 import traceback
 from datetime import datetime
 from threading import Thread
