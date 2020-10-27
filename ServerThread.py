@@ -69,9 +69,11 @@ class ServerThread(Thread):
 
                 # body_bytes_listをもとにレスポンスを作る
                 output_bytes = b""
-                output_bytes += self.get_response_header()  # レスポンスヘッダ
+                self.response_headers.append(('Content-type', f'{self._get_content_type(extend)}'))
+                print(self.response_headers)
+                output_bytes += self._get_response_header()  # レスポンスヘッダ
                 output_bytes += "\r\n".encode()  # 改行
-                output_bytes += self.get_response_body(body_bytes_list)  # レスポンスボディ
+                output_bytes += self._get_response_body(body_bytes_list)  # レスポンスボディ
 
                 self.socket.send(output_bytes)
 
@@ -82,7 +84,7 @@ class ServerThread(Thread):
                 date = f"Date: {self._get_date()}\n"
                 server = "Server: Nao/0.1\n"
                 connection = "Connection: Close\n"
-                content_type = f"Content-type: {self.CONTENT_TYPE_MAP[extend]}\n"
+                content_type = f"Content-type: {self._get_content_type(extend)}\n"
                 blank_line = "\n"
                 # 送り返す用のメッセージを生成
                 with open(os.path.join(self.DOCUMENT_ROOT, "404error.html"), "rb") as f:
@@ -98,18 +100,17 @@ class ServerThread(Thread):
             self.socket.close()
             print("Worker: 通信を終了しました")
 
-    def get_content_type(self, ext: str):
-        if ext != "" or ext not in self.CONTENT_TYPE_MAP:
+    def _get_content_type(self, ext: str):
+        if ext == "" or ext not in self.CONTENT_TYPE_MAP:
             return "application/octet-stream"
         return self.CONTENT_TYPE_MAP[ext]
 
-    def get_response_header(self) -> bytes:
+    def _get_response_header(self) -> bytes:
         """start_responseがコールされた結果をもとに、レスポンスヘッダーを取得する"""
         # ex) "HTTP/1.1 200 OK"
         status_line = "HTTP/1.1 " + self.response_line + "\r\n"
 
         # ex)
-        # response_headersはどこで作ってんの？
         # self.response_headers = [("key1", "value1"), ("key2, value2")]
         # header_text_list = ["key1: value1", "key2: value2"]
         # header_text = "key1: value1\r\n key2: value2"
@@ -122,7 +123,7 @@ class ServerThread(Thread):
         return header
 
     @staticmethod
-    def get_response_body(body_bytes_list: Iterable[bytes]) -> bytes:
+    def _get_response_body(body_bytes_list: Iterable[bytes]) -> bytes:
         """レスポンスボディを取得する"""
         return b"".join(body_bytes_list)
 

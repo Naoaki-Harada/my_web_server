@@ -32,9 +32,12 @@ class WSGIApplication:
 
         # start_responseを一度だけコールする
         # 固定で200 OKにする
-        # Content-typeも固定でhtmlにする
-        start_response('200 OK', [('Content-type', 'text/html')])
+        # Content-typeはWSGIサーバ側で編集するので空のリストにする
+        start_response('200 OK', [('Server', 'Nao/0.1'),
+                                  ('Connection', 'Close')])
 
         # レスポンスボディを返す
         # ex) '<h1>METHOD: POST, PATH: /index.html</h1>'
-        return [f'<h1>METHOD: {method}, PATH: {path}</h1>'.encode()]
+        with open(path, "rb") as f:
+            body = f.read()
+        return [body]
