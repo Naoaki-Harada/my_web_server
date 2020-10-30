@@ -41,57 +41,41 @@ class ServerThread(Thread):
                 f.write(msg_from_client)
 
             # リクエストメソッド
+            status_line = msg_from_client.decode().split("\r\n")[0]
             request_method: str = msg_from_client.decode().split("\r\n")[0].split(" ")[0]
             # 要求されたファイルのパス
             path: str = msg_from_client.decode().split("\r\n")[0].split(" ")[1]
-            extend: str = path.rsplit(".", maxsplit=1)[1]
+            headers = msg_from_client.decode().split("\r\n")[:-2]
+            body = msg_from_client.decode().split("\r\n")[-1]
+            print(body)
+
+            extend: str = path.rsplit(".", maxsplit=1)[1].split("?")[0]
             normalized_path = os.path.normpath(path)  # パスの正規化
             requested_file_path = self.DOCUMENT_ROOT + normalized_path
-            is_exists = os.path.exists(requested_file_path)
-
             # ファイルがなければ404エラーを返す
-            if is_exists:
-                # envを作る
-                env = {
-                    # HTTPリクエストのヘッダーの情報を、WSGIのルールに従って正しく作る
-                    # refs) https://www.python.org/dev/peps/pep-3333/#environ-variables
-                    "REQUEST_METHOD": request_method,
-                    "PATH_INFO": requested_file_path
-                }
+            # is_exists = os.path.exists(requested_file_path)
+            # if is_exists:
 
-                # start_responseを作る
-                def start_response(response_line: str, response_headers: List[tuple]):
-                    """start_responseが呼ばれたときに、response_lineとheadersの情報をWSGIサーバーが受け取って保持できるようにする"""
-                    self.response_line = response_line  # ステータスコード
-                    self.response_headers = response_headers  # レスポンスヘッダ
+            # envを作る
+            env = self._make_env(headers, body)
 
-                body_bytes_list: Iterable[bytes] = WSGIApplication().application(env, start_response)
+            # start_responseを作る
+            def start_response(response_line: str, response_headers: List[tuple]):
+                """start_responseが呼ばれたときに、response_lineとheadersの情報をWSGIサーバーが受け取って保持できるようにする"""
+                self.response_line = response_line  # ステータスコード
+                self.response_headers = response_headers  # レスポンスヘッダ
 
-                # body_bytes_listをもとにレスポンスを作る
-                output_bytes = b""
-                self.response_headers.append(('Content-type', f'{self._get_content_type(extend)}'))
-                print(self.response_headers)
-                output_bytes += self._get_response_header()  # レスポンスヘッダ
-                output_bytes += "\r\n".encode()  # 改行
-                output_bytes += self._get_response_body(body_bytes_list)  # レスポンスボディ
+            body_bytes_list: Iterable[bytes] = WSGIApplication().application(env, start_response)
 
-                self.socket.send(output_bytes)
+            # body_bytes_listをもとにレスポンスを作る
+            output_bytes = b""
+            self.response_headers.append(('Content-type', f'{self._get_content_type(extend)}'))
+            print(self.response_headers)
+            output_bytes += self._get_response_header()  # レスポンスヘッダ
+            output_bytes += "\r\n".encode()  # 改行
+            output_bytes += self._get_response_body(body_bytes_list)  # レスポンスボディ
 
-            else:
-                # ステータスコード
-                status_code = "HTTP/1.1 404 Not Found\n"
-                # レスポンスヘッダ
-                date = f"Date: {self._get_date()}\n"
-                server = "Server: Nao/0.1\n"
-                connection = "Connection: Close\n"
-                content_type = f"Content-type: {self._get_content_type(extend)}\n"
-                blank_line = "\n"
-                # 送り返す用のメッセージを生成
-                with open(os.path.join(self.DOCUMENT_ROOT, "404error.html"), "rb") as f:
-                    msg_to_client = (status_code + date + server + connection + content_type + blank_line).encode() \
-                                    + f.read()
-                # メッセージを送り返す
-                self.socket.send(msg_to_client)
+            self.socket.send(output_bytes)
 
         except Exception:
             print("Worker: " + traceback.format_exc())
@@ -130,3 +114,36 @@ class ServerThread(Thread):
     @staticmethod
     def _get_date() -> str:
         return datetime.datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT')
+
+    @staticmethod
+    def _make_env(headers, body):
+        for i, header in enumerate(headers):
+            if i == 0:
+                status_line = header
+                path = status_line.split(" ")[1]
+                env = {
+                    "REQUEST_METHOD": status_line.split(" ")[0],
+                    "PATH_INFO": path,
+                    "QUERY_STRING": path.split('?')[1] if len(path.split('?')) > 1 else "",
+                    "CONTENT_TYPE": '',
+                    "CONTENT_LENGTH": '',
+                    "SERVER_NAME": 'Nao/0.1',
+                    "SERVER_PROTOCOL": 'protocol',
+                }
+            elif "Content-Type" in header:
+                env = {
+                    "CONTENT_TYPE": header.split(" ")[1],
+                }
+            elif "Content-Length" in header:
+                env = {
+                    "CONTENT_LENGTH": header.split(" ")[1],
+                }
+            elif "Query-String" in header:
+                env = {
+                    "QUERY_STRING": header.split(" ")[1],
+                }
+            else:
+                key = 'HTTP_' + header.split(": ")[0].replace("-", "_").upper()
+                env[key] = header.split(": ")[1]
+        # env["wsgi.input"] =
+        return env

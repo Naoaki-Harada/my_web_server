@@ -42,6 +42,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.stylelint" value="$PROJECT_DIR$/node_modules/stylelint" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
@@ -141,9 +142,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.ServerThread" />
         <item itemvalue="Python.TcpServer" />
         <item itemvalue="Python.TcpClient" />
-        <item itemvalue="Python.ServerThread" />
       </list>
     </recent_temporary>
   </component>
@@ -163,7 +164,7 @@
       <workItem from="1602569091737" duration="4792000" />
       <workItem from="1602594786099" duration="4573000" />
       <workItem from="1603239223924" duration="14760000" />
-      <workItem from="1603757843015" duration="445000" />
+      <workItem from="1603757843015" duration="17872000" />
     </task>
     <servers />
   </component>
@@ -175,46 +176,46 @@
       <screen x="0" y="23" width="1920" height="977" />
     </state>
     <state x="780" y="495" key="#Stylelint/0.23.1920.977@0.23.1920.977" timestamp="1602138390949" />
-    <state width="927" height="263" key="GridCell.Tab.0.bottom" timestamp="1603437148714">
+    <state width="853" height="386" key="GridCell.Tab.0.bottom" timestamp="1604047799011">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="927" height="263" key="GridCell.Tab.0.bottom/0.23.1920.977@0.23.1920.977" timestamp="1603437148714" />
+    <state width="853" height="386" key="GridCell.Tab.0.bottom/0.23.1920.977@0.23.1920.977" timestamp="1604047799011" />
     <state width="1715" height="206" key="GridCell.Tab.0.bottom/0.23.1920.992@0.23.1920.992" timestamp="1600331888572" />
     <state width="1715" height="206" key="GridCell.Tab.0.bottom/0.23.1920.994@0.23.1920.994" timestamp="1600329451987" />
-    <state width="927" height="263" key="GridCell.Tab.0.center" timestamp="1603437148713">
+    <state width="853" height="386" key="GridCell.Tab.0.center" timestamp="1604047799011">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="927" height="263" key="GridCell.Tab.0.center/0.23.1920.977@0.23.1920.977" timestamp="1603437148713" />
+    <state width="853" height="386" key="GridCell.Tab.0.center/0.23.1920.977@0.23.1920.977" timestamp="1604047799011" />
     <state width="1715" height="206" key="GridCell.Tab.0.center/0.23.1920.992@0.23.1920.992" timestamp="1600331888572" />
     <state width="1715" height="206" key="GridCell.Tab.0.center/0.23.1920.994@0.23.1920.994" timestamp="1600329451986" />
-    <state width="927" height="263" key="GridCell.Tab.0.left" timestamp="1603437148713">
+    <state width="853" height="386" key="GridCell.Tab.0.left" timestamp="1604047799011">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="927" height="263" key="GridCell.Tab.0.left/0.23.1920.977@0.23.1920.977" timestamp="1603437148713" />
+    <state width="853" height="386" key="GridCell.Tab.0.left/0.23.1920.977@0.23.1920.977" timestamp="1604047799011" />
     <state width="1715" height="206" key="GridCell.Tab.0.left/0.23.1920.992@0.23.1920.992" timestamp="1600331888572" />
     <state width="1715" height="206" key="GridCell.Tab.0.left/0.23.1920.994@0.23.1920.994" timestamp="1600329451986" />
-    <state width="927" height="263" key="GridCell.Tab.0.right" timestamp="1603437148713">
+    <state width="853" height="386" key="GridCell.Tab.0.right" timestamp="1604047799011">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="927" height="263" key="GridCell.Tab.0.right/0.23.1920.977@0.23.1920.977" timestamp="1603437148713" />
+    <state width="853" height="386" key="GridCell.Tab.0.right/0.23.1920.977@0.23.1920.977" timestamp="1604047799011" />
     <state width="1715" height="206" key="GridCell.Tab.0.right/0.23.1920.992@0.23.1920.992" timestamp="1600331888572" />
     <state width="1715" height="206" key="GridCell.Tab.0.right/0.23.1920.994@0.23.1920.994" timestamp="1600329451987" />
-    <state width="758" height="253" key="GridCell.Tab.1.bottom" timestamp="1603348126545">
+    <state width="699" height="253" key="GridCell.Tab.1.bottom" timestamp="1603785710906">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="758" height="253" key="GridCell.Tab.1.bottom/0.23.1920.977@0.23.1920.977" timestamp="1603348126545" />
-    <state width="758" height="253" key="GridCell.Tab.1.center" timestamp="1603348126544">
+    <state width="699" height="253" key="GridCell.Tab.1.bottom/0.23.1920.977@0.23.1920.977" timestamp="1603785710906" />
+    <state width="699" height="253" key="GridCell.Tab.1.center" timestamp="1603785710905">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="758" height="253" key="GridCell.Tab.1.center/0.23.1920.977@0.23.1920.977" timestamp="1603348126544" />
-    <state width="758" height="253" key="GridCell.Tab.1.left" timestamp="1603348126544">
+    <state width="699" height="253" key="GridCell.Tab.1.center/0.23.1920.977@0.23.1920.977" timestamp="1603785710905" />
+    <state width="699" height="253" key="GridCell.Tab.1.left" timestamp="1603785710905">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="758" height="253" key="GridCell.Tab.1.left/0.23.1920.977@0.23.1920.977" timestamp="1603348126544" />
-    <state width="758" height="253" key="GridCell.Tab.1.right" timestamp="1603348126545">
+    <state width="699" height="253" key="GridCell.Tab.1.left/0.23.1920.977@0.23.1920.977" timestamp="1603785710905" />
+    <state width="699" height="253" key="GridCell.Tab.1.right" timestamp="1603785710906">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="758" height="253" key="GridCell.Tab.1.right/0.23.1920.977@0.23.1920.977" timestamp="1603348126545" />
+    <state width="699" height="253" key="GridCell.Tab.1.right/0.23.1920.977@0.23.1920.977" timestamp="1603785710906" />
     <state x="1086" y="324" width="670" height="676" key="search.everywhere.popup" timestamp="1601970082342">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
@@ -222,8 +223,8 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/my_web_server$TcpClient.coverage" NAME="TcpClient Coverage Results" MODIFIED="1601966182498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/my_web_server$ServerThread.coverage" NAME="ServerThread Coverage Results" MODIFIED="1601972135287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/my_web_server$main.coverage" NAME="main Coverage Results" MODIFIED="1603437148707" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/my_web_server$ServerThread.coverage" NAME="ServerThread Coverage Results" MODIFIED="1603786122648" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/my_web_server$main.coverage" NAME="main Coverage Results" MODIFIED="1604047799004" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/my_web_server$TcpServer.coverage" NAME="TcpServer Coverage Results" MODIFIED="1601969133656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
