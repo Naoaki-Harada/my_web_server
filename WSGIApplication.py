@@ -3,6 +3,9 @@ import traceback
 from datetime import datetime
 from enum import Enum
 from typing import Callable, List, Iterable, Dict
+from my_http.Request import Request
+from my_http.Response import Response, HTTP_STATUS
+from views.ParametersView import ParametersView
 
 
 # noinspection PyPep8Naming
@@ -42,6 +45,9 @@ class WSGIApplication:
                 ]
             )
         """
+
+        request = Request.from_env(env)
+
         self.env = env
         self.start_response = start_response
 
@@ -68,15 +74,18 @@ class WSGIApplication:
                 return [body_str.encode()]
 
             if path == '/parameters':
-                if env["REQUEST_METHOD"] == "GET":
-                    body_str = str(queries)
-                elif env["REQUEST_METHOD"] == "POST":
-                    body_str = str(post_params).replace('{', '').replace('}', '')
-                else:
-                    raise NotImplementedError
+                # if env["REQUEST_METHOD"] == "GET":
+                #     body_str = str(queries)
+                # elif env["REQUEST_METHOD"] == "POST":
+                #     body_str = str(post_params).replace('{', '').replace('}', '')
+                # else:
+                #     raise NotImplementedError
+                response: Response = ParametersView().get_response(request)
 
-                self.start_ok(headers={"Content-Type": "text/html"})
-                return [body_str.encode()]
+                # self.start_ok(headers={"Content-Type": "text/html"})
+                # return [body_str.encode()]
+                self.start_response_by_response(response)
+                return [response.body]
 
             try:
                 body = self.get_file_content(path)
@@ -125,3 +134,9 @@ class WSGIApplication:
             params[sq[0]] = sq[1] if len(sq) == 2 else True
 
         return params
+
+    def start_response_by_response(self, response: Response) -> None:
+        status = str(response.status)
+        headers = [(key, value) for key, value in response.headers.items()]
+
+        self.start_response(status, headers)

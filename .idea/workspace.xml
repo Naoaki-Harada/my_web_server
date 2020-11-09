@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9697ba58-03ad-4b1e-8394-b08a0872081a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/my_http/Response.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/ParametersView.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ServerThread.py" beforeDir="false" afterPath="$PROJECT_DIR$/ServerThread.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WSGIApplication.py" beforeDir="false" afterPath="$PROJECT_DIR$/WSGIApplication.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server_recv.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server_recv.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/404error.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/my_http/Request.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +167,7 @@
       <workItem from="1602594786099" duration="4573000" />
       <workItem from="1603239223924" duration="14760000" />
       <workItem from="1603757843015" duration="25482000" />
-      <workItem from="1604543439739" duration="3217000" />
+      <workItem from="1604543439739" duration="7604000" />
     </task>
     <servers />
   </component>
