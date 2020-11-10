@@ -1,18 +1,10 @@
-# -*- coding: utf-8 -*-
 import traceback
 from datetime import datetime
-from enum import Enum
 from typing import Callable, List, Iterable, Dict
+
 from my_http.Request import Request
 from my_http.Response import Response, HTTP_STATUS
 from views.ParametersView import ParametersView
-
-
-# noinspection PyPep8Naming
-class HTTP_STATUS(Enum):
-    OK = "200 OK"
-    NOT_FOUND = "404 Not Found."
-    SERVER_ERROR = "500 Internal Server Error"
 
 
 class WSGIApplication:
@@ -46,23 +38,18 @@ class WSGIApplication:
             )
         """
 
-        request = Request.from_env(env)
-
         self.env = env
         self.start_response = start_response
+
+        request = Request.from_env(env)
 
         try:
             path = env["PATH_INFO"]
 
-            if env["REQUEST_METHOD"] == "GET":
-                queries = self.parse_parameters(env["QUERY_STRING"])
-            if env["REQUEST_METHOD"] == "POST":
-                post_params = self.parse_parameters(env["wsgi.input"].read().decode())
-
             if path == '/now':
                 body_str = f"<html><body><h1>now is {datetime.now()}</h1></body></html>"
 
-                self.start_ok(headers={"Content-Type": "text/html"})
+                self._start_ok(headers={"Content-Type": "text/html"})
                 return [body_str.encode()]
 
             if path == '/headers':
@@ -70,73 +57,54 @@ class WSGIApplication:
                 for key, value in env.items():
                     body_str += f"{key}: {value}<br>"
 
-                self.start_ok(headers={"Content-Type": "text/html"})
+                self._start_ok(headers={"Content-Type": "text/html"})
                 return [body_str.encode()]
 
             if path == '/parameters':
-                # if env["REQUEST_METHOD"] == "GET":
-                #     body_str = str(queries)
-                # elif env["REQUEST_METHOD"] == "POST":
-                #     body_str = str(post_params).replace('{', '').replace('}', '')
-                # else:
-                #     raise NotImplementedError
                 response: Response = ParametersView().get_response(request)
 
-                # self.start_ok(headers={"Content-Type": "text/html"})
-                # return [body_str.encode()]
                 self.start_response_by_response(response)
                 return [response.body]
 
             try:
-                body = self.get_file_content(path)
-                self.start_ok()
+                body = self._get_file_content(path)
+                self._start_ok()
                 return [body]
 
             except OSError:
                 with open(self.DOCUMENT_404, "rb") as f:
-                    self.start_not_found()
+                    self._start_not_found()
                     return [f.read()]
 
         except Exception:
             stream = env["wsgi.errors"]
             stream.write(traceback.format_exc())
-            self.start_server_error()
+            self._start_server_error()
             return [b"<html><body><h1>500 Internal Server Error</h1></body></html>"]
 
-    def get_file_content(self, path: str) -> bytes:
+    def _get_file_content(self, path: str) -> bytes:
         with open(self.DOCUMENT_ROOT + path, "rb") as f:
             return f.read()
 
-    def start_ok(self, headers: Dict[str, str] = None) -> None:
+    def _start_ok(self, headers: Dict[str, str] = None) -> None:
         if headers is None:
             headers = {}
 
         status = HTTP_STATUS.OK
         self.start_response(str(status), [(key, value) for key, value in headers.items()])
 
-    def start_not_found(self) -> None:
+    def _start_not_found(self) -> None:
         status = HTTP_STATUS.NOT_FOUND
         self.start_response(str(status), [("Content-Type", "text/html")])
 
-    def start_server_error(self) -> None:
+    def _start_server_error(self) -> None:
         status = HTTP_STATUS.SERVER_ERROR
         self.start_response(str(status), [("Content-Type", "text/html")])
 
-    @staticmethod
-    def parse_parameters(params_string: str) -> Dict[str, str]:
-        params = {}
-        if params_string == "":
-            return params
-
-        for q in params_string.split("&"):
-            sq = q.split("=", maxsplit=1)
-
-            params[sq[0]] = sq[1] if len(sq) == 2 else True
-
-        return params
-
     def start_response_by_response(self, response: Response) -> None:
         status = str(response.status)
+
+        response.headers["Content-Type"] = response.content_type
         headers = [(key, value) for key, value in response.headers.items()]
 
         self.start_response(status, headers)
