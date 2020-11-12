@@ -5,6 +5,7 @@ from typing import Callable, List, Iterable, Dict
 from my_http.Request import Request
 from my_http.Response import Response, HTTP_STATUS
 from views.ParametersView import ParametersView
+from views.NowView import NowView
 
 
 class WSGIApplication:
@@ -43,14 +44,15 @@ class WSGIApplication:
 
         request = Request.from_env(env)
 
+        # noinspection PyBroadException
         try:
             path = env["PATH_INFO"]
 
             if path == '/now':
-                body_str = f"<html><body><h1>now is {datetime.now()}</h1></body></html>"
+                response: Response = NowView().current_time_response()
 
-                self._start_ok(headers={"Content-Type": "text/html"})
-                return [body_str.encode()]
+                self.start_response_by_response(response)
+                return [response.body]
 
             if path == '/headers':
                 body_str = ""
