@@ -41,6 +41,7 @@ class ServerThread(Thread):
 
     def run(self):
         print("Worker: 処理開始")
+        # noinspection PyBroadException
         try:
             # クライアントから受け取ったメッセージを代入
             request: bytes = self.socket.recv(4096)

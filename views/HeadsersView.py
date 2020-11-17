@@ -10,4 +10,7 @@ class HeadersView:
         :param request:
         :return:
         """
-        return Response(status=HTTP_STATUS.OK, body=str(request.headers).encode())
+        body_str = ""
+        for key, value in request.headers.items():
+            body_str += f"{key}: {value}<br>"
+        return Response(status=HTTP_STATUS.OK, body=body_str.encode())

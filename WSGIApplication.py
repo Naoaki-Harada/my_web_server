@@ -4,6 +4,7 @@ from typing import Callable, List, Iterable, Dict
 
 from my_http.Request import Request
 from my_http.Response import Response, HTTP_STATUS
+from views.HeadsersView import HeadersView
 from views.ParametersView import ParametersView
 from views.NowView import NowView
 
@@ -14,6 +15,12 @@ class WSGIApplication:
 
     DOCUMENT_ROOT = "./resources"
     DOCUMENT_404 = "./resources/404.html"
+
+    URL_VIEWS = {
+        "/now": NowView(),
+        "/parameters": ParametersView(),
+        "/headers": HeadersView(),
+    }
 
     def application(self, env: dict, start_response: Callable[[str, Iterable[tuple]], None]):
         """
@@ -43,27 +50,12 @@ class WSGIApplication:
         self.start_response = start_response
 
         request = Request.from_env(env)
+        path = request.path
 
         # noinspection PyBroadException
         try:
-            path = env["PATH_INFO"]
-
-            if path == '/now':
-                response: Response = NowView().current_time_response()
-
-                self.start_response_by_response(response)
-                return [response.body]
-
-            if path == '/headers':
-                body_str = ""
-                for key, value in env.items():
-                    body_str += f"{key}: {value}<br>"
-
-                self._start_ok(headers={"Content-Type": "text/html"})
-                return [body_str.encode()]
-
-            if path == '/parameters':
-                response: Response = ParametersView().get_response(request)
+            if path in self.URL_VIEWS:
+                response: Response = self.URL_VIEWS[path].get_response(request)
 
                 self.start_response_by_response(response)
                 return [response.body]
