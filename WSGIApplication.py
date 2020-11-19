@@ -1,5 +1,4 @@
 import traceback
-from datetime import datetime
 from typing import Callable, List, Iterable, Dict
 
 from my_http.Request import Request
@@ -7,6 +6,7 @@ from my_http.Response import Response, HTTP_STATUS
 from views.HeadsersView import HeadersView
 from views.ParametersView import ParametersView
 from views.NowView import NowView
+from views.SetCookieView import SetCookieView
 
 
 class WSGIApplication:
@@ -20,6 +20,7 @@ class WSGIApplication:
         "/now": NowView(),
         "/parameters": ParametersView(),
         "/headers": HeadersView(),
+        "/set_cookie": SetCookieView(),
     }
 
     def application(self, env: dict, start_response: Callable[[str, Iterable[tuple]], None]):

@@ -16,8 +16,10 @@ class BaseView:
         else:
             return Response(status=HTTP_STATUS.METHOD_NOT_ALLOWED)
 
-    def get(self, request: Request) -> Response:
+    @staticmethod
+    def get(request: Request) -> Response:
         return Response(status=HTTP_STATUS.METHOD_NOT_ALLOWED)
 
-    def post(self, request: Request) -> Response:
+    @staticmethod
+    def post(request: Request) -> Response:
         return Response(status=HTTP_STATUS.METHOD_NOT_ALLOWED)
