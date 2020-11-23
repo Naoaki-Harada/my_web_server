@@ -9,6 +9,7 @@ class SetCookieView(BaseView):
         """
         :return: Cookieを設定して返す
         """
-        # cookies = request.cookies
-        return Response(status=HTTP_STATUS.OK, body=b"Cookie", headers={"Set-Cookie": "hogehogehogehoge"})
-        # return Response(status=HTTP_STATUS.OK, body=b"Cookie", cookies={"key": "value"})
+        body = "cookies"
+        body += str(request.cookies)
+        return Response(status=HTTP_STATUS.OK, body=body.encode(),
+                        cookies={"test_cookie3": "hoge3", "test_cookie4": "hoge4"})

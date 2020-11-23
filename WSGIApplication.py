@@ -58,7 +58,7 @@ class WSGIApplication:
             if path in self.URL_VIEWS:
                 response: Response = self.URL_VIEWS[path].get_response(request)
 
-                self.start_response_by_response(response)
+                self._start_response_by_response(response)
                 return [response.body]
 
             try:
@@ -96,10 +96,13 @@ class WSGIApplication:
         status = HTTP_STATUS.SERVER_ERROR
         self.start_response(str(status), [("Content-Type", "text/html")])
 
-    def start_response_by_response(self, response: Response) -> None:
+    def _start_response_by_response(self, response: Response) -> None:
         status = str(response.status)
 
         response.headers["Content-Type"] = response.content_type
         headers = [(key, value) for key, value in response.headers.items()]
+
+        for key, value in response.cookies.items():
+            headers.append(("Set-Cookie", f"{key}={value}"))
 
         self.start_response(status, headers)
